@@ -1,0 +1,40 @@
+<div id="container">
+
+    <h1 id="page_header"></h1>
+
+    <div class="instructions well" id="message"></div>
+    <hr/>
+
+    <div id="full-container" style="width: 100%">
+        <div id="scale_region" style="background-color: white; display: none; margin: 0 auto">
+            <input id="scale_slider" type="range" min="0" max="100" default="50" width="1500"/>
+        </div>
+
+        <div id="mediascreen">
+        </div>
+
+
+        <div id ="response_region" style="background-color: white; display: none; margin:auto; width:50%; align-self:center; text-align:center">
+            <span id="query">
+                <b>
+                    <span >Which set of dominoes is heavier? </span>
+                    <br>
+                    <input id="response_slider" type="range" min="0" max="100" default="50" style="margin:auto;"/>
+                    <label class="pull-left"><span style="color:#eb3434;"><b>Red dominoes</b></span></label>
+                    <label class="pull-center"><i>About equal</i></label>
+                    <label class="pull-right"><span style="color:#1ecbe1;"><b>Blue dominoes</b></span></label>
+                <b>
+            </span>
+        </div>
+
+        <hr />
+        <div id="centerdiv">
+            <button id="nextbutton" class="incenterdiv btn btn-success btn-lg" disabled>Next</button>
+            <br>
+            <hr />
+            <span id="progress" class="incenterdiv" style="margin-top: 15px;">0/0</span>
+            <br>
+            <button id="reloadbutton" class="incenterdiv btn btn-success btn-med" style="display: none;">Reload Movie</button>
+        </div>
+    </div>
+</div>

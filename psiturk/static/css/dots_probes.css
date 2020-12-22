@@ -1,0 +1,60 @@
+.dot {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(180, 180, 180);
+    border-radius: 50%;
+    display: inline-block;
+
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+
+.probe {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    display: inline-block;
+    opacity: 0.0;
+
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.query-dot {
+    height: 15px;
+    width: 15px;
+    background-color: #e60000;
+    border-radius: 50%;
+    display: inline-block;
+
+    position: relative;
+    text-align: center;
+}
+
+.query-probe {
+    height: 10px;
+    width: 10px;
+    background-color: black;
+    display: inline-block;
+    opacity: 1.0;
+    position: relative;
+}
+
+.probe-indicator {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    background-color: rgba(0, 0, 0, 0);
+    border-style: dashed;
+    border-color: red;
+}

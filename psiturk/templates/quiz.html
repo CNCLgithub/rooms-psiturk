@@ -1,0 +1,57 @@
+<!--WRAPPER-->
+<div id="wrapper">
+
+    <!--LOGIN FORM-->
+    <div name="login-form" class="login-form">
+        <!--HEADER-->
+        <div class="header">
+        <!--TITLE--><h1>Comprehension Check</h1><!--END TITLE-->
+        <!--DESCRIPTION--><span></span><!-- END DESCRIPTION-->
+        </div>
+        <!--END HEADER-->
+
+        <div class="questionnaire">
+          <p id="toptext">
+              Before beginning the experiment, you must answer a few simple questions to ensure that the instructions are clear.
+              <br>If you do not answer all questions correctly, you will be returned to the start of the instructions.
+          <form id="prequiz" action="debrief" method="post">
+            <div class="question">
+              <p class="questiontext">
+                Which of the following is <b>true</b>:
+              <select id="trueFalse1" name="featureAttend">
+                <option value="noresp" SELECTED></option>
+            		<option value="a">You need to press CTRL when you see a probe.</option>
+            		<option value="b">The number of dots in a video changes</option>
+            		<option value="c">The main task is to track the four targets</option>
+              </select>
+              </p>
+            </div>
+
+            <div class="question">
+              <p class="questiontext">
+                  Which of the following statements is <b>false</b>:
+              <select id="trueFalse2" name="constantObj">
+                <option value="noresp" SELECTED></option>
+                <option value="a">You need to press SPACEBAR whenever you see a probe</option>
+                <option value="b">Maintain an arm-length distance from your monitor</option>
+                <option value="c">Probes can appear anywhere on the screen</option>
+              </select>
+              </p>
+            </div>
+
+
+
+          </form>
+          </p>
+
+        </div>
+        <!--END CONTENT-->
+        <!-- BUTTONS-->
+        <div id="centerdiv">
+          <!-- <button id="nextbutton" class="incenterdiv btn btn-success btn-lg" enabled>Continue</button> -->
+          <button type="button" id="continue" class="btn btn-warning btn-lg continue"> Continue </button>
+        </div>
+
+    </div> <!--END LOGIN FORM-->
+</div>
+<!-- END WRAPPER -->
