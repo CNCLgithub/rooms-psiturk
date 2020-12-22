@@ -55,6 +55,7 @@ class Page {
         this.addMedia();
     }
 
+    // TODO: Yihan edit here
     retrieveResponse() {
         var slider= document.getElementById("response_slider");
         var response = slider.value;
@@ -99,6 +100,7 @@ class Page {
     };
 
 
+    // Makes the response query visable
     addResponse() {
         this.response_region.style.display = 'block';
         if (this.show_response) {
@@ -118,14 +120,17 @@ class Page {
         });
     }
 
+    // TODO: Yihan edit here
     // The form will automatically enable the next button
+    // when the subject successfully responds
     enableResponse() {
         // valid condition should set
-        // self.allowNext();
+        // me.allowNext();
         //
         // othewise
-        // self.nextbutton.disabled = true;
+        // me.nextbutton.disabled = true;
         var me = this;
+        // var response_value = document.getElementById("response_press")
         var slider_value = document.getElementById("response_slider");
         slider_value.oninput = function(e) {
             me.allowNext();
