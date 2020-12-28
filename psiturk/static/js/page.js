@@ -54,14 +54,25 @@ class Page {
         this.addText();
         this.addMedia();
     }
-
+    
     // TODO: Yihan edit here
+
     retrieveResponse() {
-        var slider= document.getElementById("response_slider");
-        var response = slider.value;
-        slider.value = 50;
-        return response
+          var el = document.getElementById('nextbutton')
+          var next_clicked = false;
+          //var buffer = [];
+          document.addEventListener("keypress", function onEvent(event) {           
+          //buffer.push(event.key)
+          //var response = buffer[buffer.length-1]; 
+              var response = event.key
+              if (next_clicked){
+                  return response}
+          })
+          el.addEventListener("click", function() {
+              next_clicked = true;
+            });    
     }
+   
 
     /************
      * Helpers  *
@@ -131,11 +142,26 @@ class Page {
         // me.nextbutton.disabled = true;
         var me = this;
         // var response_value = document.getElementById("response_press")
-        var slider_value = document.getElementById("response_slider");
-        slider_value.oninput = function(e) {
+        // var slider_value = document.getElementById("response_slider");
+        // slider_value.oninput = function(e) {
+            // me.allowNext();
+        //}
+        //var buffer = new Array()
+        var response_value = document.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "j") {
             me.allowNext();
-        }
+            //buffer.push(event.key)
+            }else if (event.key === "k") {
+            me.allowNext();
+            //buffer.push(event.key)
+            }else{
+            me.nextbutton.disabled = true;    
+            }
+        });
+       //return buffer
     }
+    
+
 
     scalePage() {
         this.mediascreen.innerHTML = make_img(this.mediadata, PAGESIZE) + "<br>";
