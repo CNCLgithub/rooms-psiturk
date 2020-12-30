@@ -18,6 +18,7 @@ see help
 ```bash
 chmod +x setup.sh
 ./setup.sh --help
+./setup.sh cont data
 ```
 
 This setup file will, by default, pull a container and data files from box.
@@ -28,7 +29,7 @@ This setup file will, by default, pull a container and data files from box.
 
 ```bash
 chmod +x start_psiturk.sh
-./start_psiturk.sh
+./start_psiturk.sh on
 ```
 
 
