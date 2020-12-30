@@ -33,6 +33,7 @@ class Page {
 
         this.nextbutton.disabled = true;
         this.nextbutton.style.display = 'none';
+        this.nextbutton.style.visibility="hidden";
         this.response_region.style.display = 'none';
 
         this.query.style.display = 'none';
@@ -49,7 +50,10 @@ class Page {
         //         this.nextbutton.onclick = function() {
         //             callback();
         //         };
+        //this.nextbutton.style.visibility="visible";
+        var me = this;
         document.addEventListener("keypress", function onEvent(event) {
+        me.nextbutton.style.visibility="visible";            
         if (event.key === "j" ||event.key === "f" ) {
             //this.show_response = false
             callback();
@@ -131,7 +135,7 @@ class Page {
     // The form will automatically enable the next button
     // when the subject successfully responds
     enableResponse() {
-          var me = this;
+        var me = this;
          //var buffer = new Array()
         var response_value = document.addEventListener("keypress", function onEvent(event) {
         if (event.key === "j") {
