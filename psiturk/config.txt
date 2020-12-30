@@ -16,7 +16,7 @@ table_name = exp1_live
 [Server Parameters]
 #host = 0.0.0.0
 host = localhost
-port = 22367
+port = 5656
 cutoff_time = 30
 logfile = server.log
 loglevel = 2

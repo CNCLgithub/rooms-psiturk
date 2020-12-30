@@ -33,6 +33,7 @@ class Page {
 
         this.nextbutton.disabled = true;
         this.nextbutton.style.display = 'none';
+        this.nextbutton.style.visibility="hidden";
         this.response_region.style.display = 'none';
 
         this.query.style.display = 'none';
@@ -44,23 +45,33 @@ class Page {
     // Loads content to the page
     // The `callback` argument can be used to handle page progression
     // or subject responses
-    showPage(callback) {
-
+    showPage(callback) {        
         // create callback to progress when done
-        this.nextbutton.onclick = function() {
+        //         this.nextbutton.onclick = function() {
+        //             callback();
+        //         };
+        //this.nextbutton.style.visibility="visible";
+        var me = this;
+        document.addEventListener("keypress", function onEvent(event) {
+        me.nextbutton.style.visibility="visible";            
+        if (event.key === "j" ||event.key === "f" ) {
+            //this.show_response = false
             callback();
-        };
+            }
+        });
 
         this.addText();
         this.addMedia();
     }
-
+    
     // TODO: Yihan edit here
+
     retrieveResponse() {
-        var slider= document.getElementById("response_slider");
-        var response = slider.value;
-        slider.value = 50;
-        return response
+          document.addEventListener("keypress", function onEvent(event) {           
+              var response = event.key
+              if (response === "j" ||response === "f" ){
+                  return response}
+          })  
     }
 
     /************
@@ -124,18 +135,23 @@ class Page {
     // The form will automatically enable the next button
     // when the subject successfully responds
     enableResponse() {
-        // valid condition should set
-        // me.allowNext();
-        //
-        // othewise
-        // me.nextbutton.disabled = true;
         var me = this;
-        // var response_value = document.getElementById("response_press")
-        var slider_value = document.getElementById("response_slider");
-        slider_value.oninput = function(e) {
+         //var buffer = new Array()
+        var response_value = document.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "j") {
             me.allowNext();
-        }
+            //buffer.push(event.key)
+            }else if (event.key === "f") {
+            me.allowNext();
+            //buffer.push(event.key)
+            }else{
+            me.nextbutton.disabled = true;    
+            }
+        });
+       //return buffer
     }
+    
+
 
     scalePage() {
         this.mediascreen.innerHTML = make_img(this.mediadata, PAGESIZE) + "<br>";
