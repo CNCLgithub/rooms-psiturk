@@ -39,26 +39,30 @@ class Page {
         this.query.style.display = 'none';
         this.query.style.color = 'black';
         this.mediascreen.innerHTML = "";
-        this.animation = undefined;
+        this.response = undefined;
     }
 
     // Loads content to the page
     // The `callback` argument can be used to handle page progression
     // or subject responses
     showPage(callback) {        
-        // create callback to progress when done
-        //         this.nextbutton.onclick = function() {
-        //             callback();
-        //         };
-        //this.nextbutton.style.visibility="visible";
         var me = this;
-        document.addEventListener("keypress", function onEvent(event) {
-        me.nextbutton.style.visibility="visible";            
-        if (event.key === "j" ||event.key === "f" ) {
-            //this.show_response = false
-            callback();
-            }
-        });
+        if (this.show_response) {
+            document.onkeyup = function(evt) {
+                evt = evt || window.event;
+                var r = evt.key;
+                if (r === "j" || r === "f" ){
+                    callback();
+                }
+            };
+        } else {
+
+            // create callback to progress when done
+            this.nextbutton.onclick = function() {
+                callback();
+            };
+        }
+
 
         this.addText();
         this.addMedia();
@@ -67,11 +71,7 @@ class Page {
     // TODO: Yihan edit here
 
     retrieveResponse() {
-          document.addEventListener("keypress", function onEvent(event) {           
-              var response = event.key
-              if (response === "j" ||response === "f" ){
-                  return response}
-          })  
+        return this.response;
     }
 
     /************
@@ -115,6 +115,7 @@ class Page {
     addResponse() {
         this.response_region.style.display = 'block';
         if (this.show_response) {
+
             this.query.style.display = 'block';
             this.enableResponse();
         // if no response required, then simply allow to go further
@@ -135,19 +136,29 @@ class Page {
     // The form will automatically enable the next button
     // when the subject successfully responds
     enableResponse() {
+
         var me = this;
-         //var buffer = new Array()
-        var response_value = document.addEventListener("keypress", function onEvent(event) {
-        if (event.key === "j") {
-            me.allowNext();
-            //buffer.push(event.key)
-            }else if (event.key === "f") {
-            me.allowNext();
-            //buffer.push(event.key)
-            }else{
-            me.nextbutton.disabled = true;    
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            var r = evt.key;
+            if (r === "j" || r === "f" ){
+                me.response = r;
             }
-        });
+        };
+        // var me = this;
+         //var buffer = new Array()
+        // var response_value = document.addEventListener("keypress", function onEvent(event) {
+        // if (event.key === "j") {
+        //     me.allowNext();
+        //     //buffer.push(event.key)
+        //     }else if (event.key === "f") {
+        //     me.allowNext();
+        //     //buffer.push(event.key)
+        //     }else{
+        //     me.nextbutton.disabled = true;
+        //     }
+        // });
        //return buffer
     }
     
@@ -229,6 +240,7 @@ class Page {
         var video = document.getElementById('video');
 
         video.onended = function() {
+            video.style.display = 'none';
             me.addResponse();
         };
 
