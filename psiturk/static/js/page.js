@@ -44,12 +44,17 @@ class Page {
     // Loads content to the page
     // The `callback` argument can be used to handle page progression
     // or subject responses
-    showPage(callback) {
-
+    showPage(callback) {        
         // create callback to progress when done
-        this.nextbutton.onclick = function() {
+        //         this.nextbutton.onclick = function() {
+        //             callback();
+        //         };
+        document.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "j" ||event.key === "f" ) {
+            //this.show_response = false
             callback();
-        };
+            }
+        });
 
         this.addText();
         this.addMedia();
@@ -58,21 +63,12 @@ class Page {
     // TODO: Yihan edit here
 
     retrieveResponse() {
-          var el = document.getElementById('nextbutton')
-          var next_clicked = false;
-          //var buffer = [];
           document.addEventListener("keypress", function onEvent(event) {           
-          //buffer.push(event.key)
-          //var response = buffer[buffer.length-1]; 
               var response = event.key
-              if (next_clicked){
+              if (response === "j" ||response === "f" ){
                   return response}
-          })
-          el.addEventListener("click", function() {
-              next_clicked = true;
-            });    
+          })  
     }
-   
 
     /************
      * Helpers  *
@@ -135,23 +131,13 @@ class Page {
     // The form will automatically enable the next button
     // when the subject successfully responds
     enableResponse() {
-        // valid condition should set
-        // me.allowNext();
-        //
-        // othewise
-        // me.nextbutton.disabled = true;
-        var me = this;
-        // var response_value = document.getElementById("response_press")
-        // var slider_value = document.getElementById("response_slider");
-        // slider_value.oninput = function(e) {
-            // me.allowNext();
-        //}
-        //var buffer = new Array()
+          var me = this;
+         //var buffer = new Array()
         var response_value = document.addEventListener("keypress", function onEvent(event) {
         if (event.key === "j") {
             me.allowNext();
             //buffer.push(event.key)
-            }else if (event.key === "k") {
+            }else if (event.key === "f") {
             me.allowNext();
             //buffer.push(event.key)
             }else{
