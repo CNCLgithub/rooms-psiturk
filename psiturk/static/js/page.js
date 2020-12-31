@@ -7,8 +7,8 @@ class Page {
      * Public Methods  *
      *******************/
 
-    constructor(text, mediatype, mediadata, show_response, next_delay,
-                header_text = "") {
+    constructor(text, mediatype, mediadata, show_response,
+                next_delay = 0.0, header_text = "") {
 
         // page specific variables
         this.text = text;
@@ -237,7 +237,9 @@ class Page {
         let me = this;
 
         this.mediascreen.innerHTML = make_mov(this.mediadata, PAGESIZE);
+        this.mediascreen.style.display = 'block';
         var video = document.getElementById('video');
+        video.style.display = 'none'
 
         video.onended = function() {
             video.style.display = 'none';
@@ -245,7 +247,12 @@ class Page {
         };
 
         video.oncanplaythrough = function() {
-            video.play();
+
+            sleep(me.next_delay*1000).then(() => {
+                video.style.display = 'block'
+                video.play();
+            });
+
         };
 
         // making sure there is space for rotation
@@ -253,7 +260,6 @@ class Page {
         this.scaleMediascreen();
 
         video.style.transform = `rotate(${this.rot_angle}deg)`;
-        this.mediascreen.style.display = 'block';
     }
 
     showImage() {
