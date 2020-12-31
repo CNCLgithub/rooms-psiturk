@@ -33,7 +33,7 @@ class Page {
 
         this.nextbutton.disabled = true;
         this.nextbutton.style.display = 'none';
-        this.nextbutton.style.visibility="hidden";
+        // this.nextbutton.style.visibility="hidden";
         this.response_region.style.display = 'none';
 
         this.query.style.display = 'none';
@@ -115,7 +115,6 @@ class Page {
     addResponse() {
         this.response_region.style.display = 'block';
         if (this.show_response) {
-
             this.query.style.display = 'block';
             this.enableResponse();
         // if no response required, then simply allow to go further
@@ -128,6 +127,7 @@ class Page {
     allowNext() {
         sleep(this.next_delay*1000).then(() => {
             this.nextbutton.disabled = false;
+            this.nextbutton.style.display = "block";
             this.nextbutton.style.display = "block";
         });
     }
