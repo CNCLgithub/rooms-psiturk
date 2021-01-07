@@ -12,23 +12,23 @@ organization_name = Yale
 browser_exclude_rule = MSIE, mobile, tablet, Safari
 [Database Parameters]
 database_url = sqlite:///participants.db
-table_name = exp1_live
+table_name = pilot
 [Server Parameters]
 #host = 0.0.0.0
 host = localhost
-port = 5656
-cutoff_time = 30
+port = 22367
+cutoff_time = 90
 logfile = server.log
 loglevel = 2
 debug = true
 login_username = cncl_lab
-login_pw = R!C4Sk;zhTXuk"wXMQJ;^I24w 
+login_pw = R!C4Sk;zhTXuk"wXMQJ;^I24w
 threads = auto
 secret_key = 'this is my secret key which is hard to guess, i should change this'
 #certfile = <path_to.crt>
 #keyfile = <path_to.key>
 [Task Parameters]
-experiment_code_version = 1.1
+experiment_code_version = 2.0
 num_conds = 1
 num_counters = 1
 [Shell Parameters]

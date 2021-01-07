@@ -18,7 +18,7 @@ var PAGESIZE = 500;
 // Define global experiment variables
 var SCALE_COMPLETE = false; // users do not need to repeat scaling
 var PROLIFIC_ID = "";
-var N_TRIALS = 60;
+var N_TRIALS = 120;
 var START_INSTRUCTION = 0;
 
 // Debug Variables
