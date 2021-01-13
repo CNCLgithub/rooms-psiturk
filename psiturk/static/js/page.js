@@ -69,7 +69,7 @@ class Page {
     retrieveResponse() {
         var resp = this.response;
         this.response = undefined;
-        return rep;
+        return resp;
     }
 
     /************
