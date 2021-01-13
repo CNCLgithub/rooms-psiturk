@@ -66,10 +66,10 @@ class Page {
         this.addMedia();
     }
     
-    // TODO: Yihan edit here
-
     retrieveResponse() {
-        return this.response;
+        var resp = this.response;
+        this.response = undefined;
+        return rep;
     }
 
     /************
@@ -134,9 +134,7 @@ class Page {
     // The form will automatically enable the next button
     // when the subject successfully responds
     enableResponse() {
-
         var me = this;
-
         document.onkeydown = function(evt) {
             evt = evt || window.event;
             var r = evt.key;
@@ -144,20 +142,6 @@ class Page {
                 me.response = r;
             }
         };
-        // var me = this;
-         //var buffer = new Array()
-        // var response_value = document.addEventListener("keypress", function onEvent(event) {
-        // if (event.key === "j") {
-        //     me.allowNext();
-        //     //buffer.push(event.key)
-        //     }else if (event.key === "f") {
-        //     me.allowNext();
-        //     //buffer.push(event.key)
-        //     }else{
-        //     me.nextbutton.disabled = true;
-        //     }
-        // });
-       //return buffer
     }
     
 
