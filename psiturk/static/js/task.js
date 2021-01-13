@@ -22,9 +22,9 @@ var N_TRIALS = 120;
 var START_INSTRUCTION = 0;
 
 // Debug Variables
-var SKIP_INSTRUCTIONS = false;
+// var SKIP_INSTRUCTIONS = false;
 var SKIP_QUIZ = false;
-// var SKIP_INSTRUCTIONS = true;
+var SKIP_INSTRUCTIONS = true;
 // var SKIP_QUIZ = true;
 
 // All pages to be loaded

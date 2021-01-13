@@ -49,9 +49,7 @@ class Page {
         var me = this;
         if (this.show_response) {
             document.onkeyup = function(evt) {
-                evt = evt || window.event;
-                var r = evt.key;
-                if (r === "j" || r === "f" ){
+                if (me.response == "j" || me.response == "f"){
                     callback();
                 }
             };
@@ -125,11 +123,11 @@ class Page {
 
     // allows the subject to continue with an optional delay
     allowNext() {
-        sleep(this.next_delay*1000).then(() => {
-            this.nextbutton.disabled = false;
-            this.nextbutton.style.display = "block";
-            this.nextbutton.style.display = "block";
-        });
+        this.nextbutton.disabled = false;
+        this.nextbutton.style.display = "block";
+        this.nextbutton.style.display = "block";
+        // sleep(this.next_delay*1000).then(() => {
+        // });
     }
 
     // TODO: Yihan edit here
