@@ -151,10 +151,12 @@ class Page {
         let self = this;
 
         if (SCALE_COMPLETE) {
-            this.mediascreen.innerHTML = "";
-            this.instruct.innerHTML = "You have already scaled your monitor";
-            this.addResponse();
+	    self.mediascreen.innerHTML = "";
+	    self.scale_region.innerHTML = "You have already scaled your monitor";
+            self.addResponse();
         } else {
+          
+            self.mediascreen.innerHTML = make_img(self.mediadata, PAGESIZE) + "<br>";
             this.scale_region.style.display = 'block';
             var slider_value = document.getElementById("scale_slider");
             var scale_img = document.getElementById("img");
@@ -225,6 +227,8 @@ class Page {
 
         video.onended = function() {
             video.style.display = 'none';
+            video.style.visibility = 'hidden';
+	    console.log(video.style);
             me.addResponse();
         };
 

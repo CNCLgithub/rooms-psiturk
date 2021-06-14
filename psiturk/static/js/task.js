@@ -18,14 +18,14 @@ var PAGESIZE = 500;
 // Define global experiment variables
 var SCALE_COMPLETE = false; // users do not need to repeat scaling
 var PROLIFIC_ID = "";
-var N_TRIALS = 120;
+var N_TRIALS = 128;
 var START_INSTRUCTION = 0;
 
 // Debug Variables
 var SKIP_INSTRUCTIONS = false;
 var SKIP_QUIZ = false;
-// var SKIP_INSTRUCTIONS = true;
-// var SKIP_QUIZ = true;
+//var SKIP_INSTRUCTIONS = true;
+//var SKIP_QUIZ = true;
 
 // All pages to be loaded
 var pages = [

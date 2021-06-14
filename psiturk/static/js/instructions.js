@@ -58,7 +58,7 @@ var instructions = [
         "image", "1.png", false, 3
     ],
     [
-        "", "movie", "1_1.mp4", false, 0
+        "", "movie", "1_1_1.mp4", false, 0
     ],
     [
         "At the end of each instance of the task, please record your response with your key board.<br>" +
@@ -68,7 +68,7 @@ var instructions = [
     ],
     [
         "",
-        "movie", "1_1.mp4", true, 0
+        "movie", "1_1_1.mp4", true, 0
     ],
     [
         `Please maintain this arm-length distance from your monitor for the duration of this experiment (${EXP_DURATION} minutes).` +
