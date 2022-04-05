@@ -1,34 +1,35 @@
 [HIT Configuration]
-title = Tracking multiple moving objects
-description = Track objects as they move around the screen
+title = Change Detection
+description = try and detect any difference between pairs of images
 amt_keywords = Perception, Psychology
 lifetime = 24
 us_only = true
 approve_requirement = 95
 contact_email_on_error = cncl-participate@yale.edu
-ad_group = Tracking multiple moving objects
-psiturk_keywords = physics, psychology
+ad_group = Change detection
+psiturk_keywords = vision, psychology
 organization_name = Yale
 browser_exclude_rule = MSIE, mobile, tablet, Safari
 [Database Parameters]
 database_url = sqlite:///participants.db
-table_name = exp1_live
+table_name = 1_cubes_doors
 [Server Parameters]
-#host = 0.0.0.0
-host = localhost
-port = 5656
-cutoff_time = 30
+host = 0.0.0.0
+#host = localhost
+port = 22367
+cutoff_time = 90
 logfile = server.log
 loglevel = 2
 debug = true
 login_username = cncl_lab
-login_pw = R!C4Sk;zhTXuk"wXMQJ;^I24w 
+login_pw = R!C4Sk;zhTXuk"wXMQJ;^I24w
 threads = auto
 secret_key = 'this is my secret key which is hard to guess, i should change this'
 #certfile = <path_to.crt>
 #keyfile = <path_to.key>
 [Task Parameters]
-experiment_code_version = 1.1
+# 500 ms, 16 obj scenes
+experiment_code_version = 8.0
 num_conds = 1
 num_counters = 1
 [Shell Parameters]

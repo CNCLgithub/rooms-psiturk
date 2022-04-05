@@ -7,8 +7,8 @@ class Page {
      * Public Methods  *
      *******************/
 
-    constructor(text, mediatype, mediadata, show_response, next_delay,
-                header_text = "") {
+    constructor(text, mediatype, mediadata, show_response,
+                next_delay = 0.0, header_text = "") {
 
         // page specific variables
         this.text = text;
@@ -33,45 +33,43 @@ class Page {
 
         this.nextbutton.disabled = true;
         this.nextbutton.style.display = 'none';
-        this.nextbutton.style.visibility="hidden";
+        // this.nextbutton.style.visibility="hidden";
         this.response_region.style.display = 'none';
 
         this.query.style.display = 'none';
         this.query.style.color = 'black';
         this.mediascreen.innerHTML = "";
-        this.animation = undefined;
+        this.response = undefined;
     }
 
     // Loads content to the page
     // The `callback` argument can be used to handle page progression
     // or subject responses
     showPage(callback) {        
-        // create callback to progress when done
-        //         this.nextbutton.onclick = function() {
-        //             callback();
-        //         };
-        //this.nextbutton.style.visibility="visible";
         var me = this;
-        document.addEventListener("keypress", function onEvent(event) {
-        me.nextbutton.style.visibility="visible";            
-        if (event.key === "j" ||event.key === "f" ) {
-            //this.show_response = false
-            callback();
-            }
-        });
+        if (this.show_response) {
+            document.onkeyup = function(evt) {
+                if (me.response == "j" || me.response == "f"){
+                    callback();
+                }
+            };
+        } else {
+
+            // create callback to progress when done
+            this.nextbutton.onclick = function() {
+                callback();
+            };
+        }
+
 
         this.addText();
         this.addMedia();
     }
     
-    // TODO: Yihan edit here
-
     retrieveResponse() {
-          document.addEventListener("keypress", function onEvent(event) {           
-              var response = event.key
-              if (response === "j" ||response === "f" ){
-                  return response}
-          })  
+        var resp = this.response;
+        this.response = undefined;
+        return resp;
     }
 
     /************
@@ -125,10 +123,11 @@ class Page {
 
     // allows the subject to continue with an optional delay
     allowNext() {
-        sleep(this.next_delay*1000).then(() => {
-            this.nextbutton.disabled = false;
-            this.nextbutton.style.display = "block";
-        });
+        this.nextbutton.disabled = false;
+        this.nextbutton.style.display = "block";
+        this.nextbutton.style.display = "block";
+        // sleep(this.next_delay*1000).then(() => {
+        // });
     }
 
     // TODO: Yihan edit here
@@ -136,19 +135,13 @@ class Page {
     // when the subject successfully responds
     enableResponse() {
         var me = this;
-         //var buffer = new Array()
-        var response_value = document.addEventListener("keypress", function onEvent(event) {
-        if (event.key === "j") {
-            me.allowNext();
-            //buffer.push(event.key)
-            }else if (event.key === "f") {
-            me.allowNext();
-            //buffer.push(event.key)
-            }else{
-            me.nextbutton.disabled = true;    
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            var r = evt.key;
+            if (r === "j" || r === "f" ){
+                me.response = r;
             }
-        });
-       //return buffer
+        };
     }
     
 
@@ -158,10 +151,12 @@ class Page {
         let self = this;
 
         if (SCALE_COMPLETE) {
-            this.mediascreen.innerHTML = "";
-            this.instruct.innerHTML = "You have already scaled your monitor";
-            this.addResponse();
+	    self.mediascreen.innerHTML = "";
+	    self.scale_region.innerHTML = "You have already scaled your monitor";
+            self.addResponse();
         } else {
+          
+            self.mediascreen.innerHTML = make_img(self.mediadata, PAGESIZE) + "<br>";
             this.scale_region.style.display = 'block';
             var slider_value = document.getElementById("scale_slider");
             var scale_img = document.getElementById("img");
@@ -226,14 +221,24 @@ class Page {
         let me = this;
 
         this.mediascreen.innerHTML = make_mov(this.mediadata, PAGESIZE);
+        this.mediascreen.style.display = 'block';
         var video = document.getElementById('video');
+        video.style.display = 'none'
 
         video.onended = function() {
+            video.style.display = 'none';
+            video.style.visibility = 'hidden';
+	    console.log(video.style);
             me.addResponse();
         };
 
         video.oncanplaythrough = function() {
-            video.play();
+
+            sleep(me.next_delay*1000).then(() => {
+                video.style.display = 'block'
+                video.play();
+            });
+
         };
 
         // making sure there is space for rotation
@@ -241,7 +246,6 @@ class Page {
         this.scaleMediascreen();
 
         video.style.transform = `rotate(${this.rot_angle}deg)`;
-        this.mediascreen.style.display = 'block';
     }
 
     showImage() {
