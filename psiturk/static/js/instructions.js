@@ -5,8 +5,8 @@
 // 4: Whether to show the response div and what to show (false/"td"/"pr")
 // 5: Any delay added to progression
 
-var EXP_DURATION = 20;
-var N_TRIALS = 120;
+// var EXP_DURATION = 20;
+// var N_TRIALS = 120;
 
 var instructions = [
     [

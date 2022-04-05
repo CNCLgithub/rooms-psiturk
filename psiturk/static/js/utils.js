@@ -44,6 +44,18 @@ const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds)); 
 }; 
 
+function rand_int(max) {
+    return  Math.floor(Math.random() * max);
+}
+
+const alignment_conditions = [
+    [-1,  1], // top left
+    [-1,  1], // bottom left
+    [ 1,  1],  // top right
+    [ 1, -1]  // bottom right
+]
+
+
 /********************
  * HTML manipulation
  *
@@ -58,6 +70,26 @@ var make_img = function(imgname, size) {
     var r = "<image id=\"img\" "
     r += `class="movieobj" src="static/data/images/${imgname}" alt="Movie" style="height: auto; width: ${size}px">`
     return r
+};
+
+
+var make_stim_img = function(img_el, top, left, bbox) {
+    // Get the dimensions of their screen so that you can calculate positions
+    var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    // set width
+    img_el.style.width =  `${PAGESIZE}px`;
+    // position
+    var ihc = 0.5 * 0.666 * PAGESIZE; // approx height for now
+    var iwc = 0.5 * PAGESIZE;
+    console.log(ihc, iwc);
+    img_el.style.position = "absolute";
+    img_el.style.bottom = "0";
+    img_el.style.top = "0";
+    console.log(h, w, ihc, iwc);
+    img_el.style.top =  `${0.4*h + (top * SHIFT_PCT * ihc) - ihc}px`;
+    img_el.style.left =  `${0.5*w + (left * SHIFT_PCT * iwc) - iwc}px`;
+    return img_el
 };
 
 var make_mov = function(movname, size) {
@@ -147,4 +179,36 @@ function isMobileTablet(){
             check = true;
     })(navigator.userAgent||navigator.vendor||window.opera);
     return check;
+}
+async function loadImages(imageUrlArray) {
+    const promiseArray = []; // create an array for promises
+    const imageArray = []; // array for the images
+
+    for (let imageUrl of imageUrlArray) {
+
+        promiseArray.push(new Promise(resolve => {
+
+            const img = new Image();
+            img.style.visibility = "hidden";
+            // if you don't need to do anything when the image loads,
+            // then you can just write img.onload = resolve;
+
+            img.onload = function() {
+                // do stuff with the image if necessary
+
+                // resolve the promise, indicating that the image has been loaded
+                resolve();
+            };
+
+            img.class = "movieobj";
+            img.alt = "Movie";
+            img.src = `static/data/images/${imageUrl}`;
+            img.style.position = "relative";
+            imageArray.push(img);
+        }));
+    }
+
+    await Promise.all(promiseArray); // wait for all the images to be loaded
+    console.log("all images loaded");
+    return imageArray;
 }

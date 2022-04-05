@@ -94,6 +94,8 @@ class Page {
 
         if (this.mediatype === 'image') {
             this.showImage();
+        } else if (this.mediatype === 'stim_img') {
+            this.showStimImage();
         } else if (this.mediatype === 'movie') {
             this.showMovie();
         } else if (this.mediatype == 'scale'){
@@ -251,6 +253,56 @@ class Page {
     showImage() {
         this.mediascreen.innerHTML = make_img(this.mediadata, PAGESIZE) + "<br>";
         this.addResponse();
+    }
+
+    showStimImage() {
+        var [top, left] = alignment_conditions[rand_int(4)];
+        // var [img_a_file, img_b_file] = this.mediadata;
+
+        var me = this;
+        var ms = this.mediascreen
+        ms.innerHTML = "";
+        var image_paths = this.mediadata;
+        loadImages(image_paths).then(images => {
+            // the loaded images are in the images array
+            var [img_a, img_b] = images;
+            var bbox = ms.getBoundingClientRect();
+            make_stim_img(img_a,
+                          top,
+                          left,
+                          bbox);
+            make_stim_img(img_b,
+                          -1 * top,
+                          -1 * left,
+                          bbox);
+
+            ms.appendChild(img_a);
+            ms.appendChild(img_b);
+            var current_time = new Date().getTime();
+            // show A
+            img_a.style.visibility = "visible";
+            sleep(PRESENT_STIM).then(() => {
+                // mask is just white screen
+                // hide A
+                img_a.style.visibility = "hidden";
+                var time_b = new Date().getTime();
+                console.log("duration a: " + (time_b - current_time));
+                sleep(PRESENT_MASK).then(() => {
+                    // show B
+                    img_b.style.visibility = "visible";
+                    current_time = new Date().getTime();
+                    // hidden second image
+                    sleep(PRESENT_STIM).then(() => {
+                        img_b.style.visibility = "hidden";
+                        time_b = new Date().getTime();
+                        console.log("duration b: " + (time_b - current_time));
+                        me.addResponse();
+                    });
+                });
+            });
+
+        })
+
     }
 
     showEmpty() {
