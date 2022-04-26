@@ -12,7 +12,7 @@ organization_name = Yale
 browser_exclude_rule = MSIE, mobile, tablet, Safari
 [Database Parameters]
 database_url = sqlite:///participants.db
-table_name = 1_cubes_doors
+table_name = vss_pilot_inverted
 [Server Parameters]
 host = 0.0.0.0
 #host = localhost
@@ -28,8 +28,7 @@ secret_key = 'this is my secret key which is hard to guess, i should change this
 #certfile = <path_to.crt>
 #keyfile = <path_to.key>
 [Task Parameters]
-# 500 ms, 16 obj scenes
-experiment_code_version = 8.0
+experiment_code_version = 1.0
 num_conds = 1
 num_counters = 1
 [Shell Parameters]

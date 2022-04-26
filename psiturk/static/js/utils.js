@@ -68,27 +68,41 @@ const alignment_conditions = [
 
 var make_img = function(imgname, size) {
     var r = "<image id=\"img\" "
-    r += `class="movieobj" src="static/data/images/${imgname}" alt="Movie" style="height: auto; width: ${size}px">`
+    r += `class="movieobj" src="static/data/images/${imgname}" alt="Movie" style="height: auto; width: ${size}px`
+    if (INVERT_STIM) {
+        r += "scaleY(-1); ";
+    };
+    r += "\">"
     return r
 };
 
 
-var make_stim_img = function(img_el, top, left, bbox) {
+var make_stim_img = function(img_el, top, left, bbox, flipX) {
     // Get the dimensions of their screen so that you can calculate positions
     var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     // set width
     img_el.style.width =  `${PAGESIZE}px`;
     // position
-    var ihc = 0.5 * 0.666 * PAGESIZE; // approx height for now
+    var ihc = 0.5 * 0.666 * PAGESIZE; // approx height for now, ratio 2:3
     var iwc = 0.5 * PAGESIZE;
-    console.log(ihc, iwc);
-    img_el.style.position = "absolute";
-    img_el.style.bottom = "0";
-    img_el.style.top = "0";
+    img_el.style.position = "fixed";
+    // 0.4 instead of 0.5 to bump images up slightly
+    // the bottom divs appear cluttered with 0.5
     console.log(h, w, ihc, iwc);
-    img_el.style.top =  `${0.4*h + (top * SHIFT_PCT * ihc) - ihc}px`;
     img_el.style.left =  `${0.5*w + (left * SHIFT_PCT * iwc) - iwc}px`;
+    img_el.style.top =  `${0.4*h - (top * SHIFT_PCT * ihc) - ihc }px`;
+    // console.log(left, top);
+    // console.log(img_el.style.left);
+    // console.log(img_el.style.top);
+    img_el.style.transform = ""
+    if (flipX) {
+        img_el.style.transform = "scaleX(-1);";
+    };
+    if (INVERT_STIM) {
+        img_el.style.transform += "scaleY(-1)";
+    };
+
     return img_el
 };
 

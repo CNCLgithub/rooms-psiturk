@@ -262,7 +262,8 @@ class Page {
         var me = this;
         var ms = this.mediascreen
         ms.innerHTML = "";
-        var image_paths = this.mediadata;
+        var [img_a_p, img_b_p, flip] = this.mediadata;
+        var image_paths = [img_a_p, img_b_p];
         loadImages(image_paths).then(images => {
             // the loaded images are in the images array
             var [img_a, img_b] = images;
@@ -270,11 +271,13 @@ class Page {
             make_stim_img(img_a,
                           top,
                           left,
-                          bbox);
+                          bbox,
+                          flip);
             make_stim_img(img_b,
                           -1 * top,
                           -1 * left,
-                          bbox);
+                          bbox,
+                          flip);
 
             ms.appendChild(img_a);
             ms.appendChild(img_b);

@@ -55,10 +55,10 @@ var instructions = [
         "At the beginning of each instance of the task, you will briefly see two images of rooms, with a white flash in between.<br> "+
             "Your task is to determine wether the two scene images where identical or different in any way.<br>" +
             "Click <b>Next</b> to see an example video.",
-        "image", "1.png", false, 3
+        "image", "example_a.png", false, 3
     ],
     [
-        "", "movie", "1_1_1.mp4", false, 0
+        "", "stim_img", ["example_a.png", "example_b.png", false], false, 0
     ],
     [
         "At the end of each instance of the task, please record your response with your key board.<br>" +
@@ -67,8 +67,7 @@ var instructions = [
         "", "", false, 3
     ],
     [
-        "",
-        "movie", "1_1_1.mp4", true, 0
+        "", "stim_img", ["example_a.png", "example_b.png", false], true, 0
     ],
     [
         `Please maintain this arm-length distance from your monitor for the duration of this experiment (${EXP_DURATION} minutes).` +
